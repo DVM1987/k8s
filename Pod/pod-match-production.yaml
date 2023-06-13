@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-match-production
+  labels:
+    app: my-app
+    environment: production
+spec:
+  containers:
+    - name: my-container
+      image: nginx:latest
+      ports:
+        - containerPort: 80
+  nodeSelector:
+    disk: ssd
+  affinity:
+    podAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+              # - key: app
+              #   operator: In
+              #   values:
+              #     - my-app
+              - key: environment
+                operator: In
+                values:
+                  - staging
+          topologyKey: kubernetes.io/zone
+    # podAntiAffinity:
+    #   requiredDuringSchedulingIgnoredDuringExecution:
+    #     - labelSelector:
+    #         matchExpressions:
+    #           # - key: app
+    #           #   operator: In
+    #           #   values:
+    #           #     - my-app
+    #           - key: environment
+    #             operator: NotIn
+    #             values:
+    #               - staging
+    #       topologyKey: kubernetes.io/hostname

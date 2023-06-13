@@ -1,0 +1,66 @@
+DOCKER
+1. docker run -it -d nginx
+2.docker run -it -d --name nameContaioner image
+3.docker exec -it c-nginx bin/bash
+5.apt-get update
+6.apt-get install iputils-ping -y
+7.docker network connect n-nginx c-nginx
+8.docker inspect n-nginx
+
+II. Volume data in docker
+1.docker run -it -d --name c-nginx -v ~/Desktop/kubernet/data:/var/log nginx
+2.docker volume create v-nginx
+3.ocker run -it -d --name c-nginx -v v-nginx:/var/log/nginx  nginx
+III. Dockerfile
+1.docker build -t image-demo .
+2.docker images
+
+III. Docker compose & Docker Registry
+1.docker commit ( chuyen container thanh image)
+2.docker login
+3.docker run -d -p 5000:5000 --name registry registry 
+4.docker tag image-test localhost:5000/image-test
+5.docker push localhost:5000/image-test
+
+
+PHAN kubernet
+https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+I. Service
+1. Type ClusterIP : Internal
+2. kubectl apply -f fileyaml
+3. kubectl get svc ( get all services)
+4. kubectl delete svc/my-service -- delete service
+5. kubectl describe svc/my-service
+6. rm -r endpoint.yaml
+
+2 Type : Nodeport
+1.kubectl create ns frontend
+2.kubectl get pods -n frontend
+3.kubectl apply -f node-port.yaml -n frontend
+4.kubectl describe svc/my-service -n frontend
+
+rm /etc/containerd/config.toml
+systemctl restart containerd
+
+install calico
+wget https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/custom-resources.yaml
+
+tao pod
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/tigera-operator.yaml
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/custom-resources.yaml
+
+kubeadm reset
+kubeadm token create --print-join-command
+
+-------------------------------------
+pod
+1. Tao pod
+--kubectl apply -f nginx.yaml
+2. xem pod
+-- kubectl get pods -o wide
+3. get ns
+-- kubectl get ns
+4. describe
+-- kubectl describe pod my-container
+5. kubectl delete pod my-po
+----------------------------------------
