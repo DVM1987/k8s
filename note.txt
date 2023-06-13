@@ -64,3 +64,6 @@ pod
 -- kubectl describe pod my-container
 5. kubectl delete pod my-po
 ----------------------------------------
+DVM1987/Kubernete
+git clone git@github.com:DVM1987/Kubernete.git -b develop
+https://github.com/DVM1987/Kubernete.git
